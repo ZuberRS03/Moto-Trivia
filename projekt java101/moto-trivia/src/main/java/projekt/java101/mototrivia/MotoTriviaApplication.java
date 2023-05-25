@@ -17,4 +17,5 @@ public class MotoTriviaApplication {
 		SpringApplication.run(MotoTriviaApplication.class, args);
 	}
 
+
 }

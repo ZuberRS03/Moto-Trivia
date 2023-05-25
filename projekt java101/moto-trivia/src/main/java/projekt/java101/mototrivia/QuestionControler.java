@@ -1,7 +1,6 @@
 package projekt.java101.mototrivia;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,17 +12,20 @@ public class QuestionControler {
         private final QuestionService questionService;
 
         @Autowired
-        public QuestionController(QuestionService QuestionService) {
+        public QuestionControler(QuestionService questionService) {
+
                 this.questionService = questionService;
         }
 
         @GetMapping("/")
         public List<Question> getQuestion(){
+
                 return questionService.getQuestions();
         }
 
         @PostMapping("/")
         public void cerateNewQuestion(@RequestBody Question question){
+
                 questionService.addNewQuestion(question);
         }
 

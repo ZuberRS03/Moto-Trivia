@@ -47,8 +47,8 @@ public class QuestionService {
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new IllegalStateException("Student with id " + questionId + " does not exist!"));
 
-        if (questionText != null && questionText.length() > 0 && !Objects.equals(question.getQuestion(), questionText)) {
-            question.setQuestion(questionText);
+        if (questionText != null && questionText.length() > 0 && !Objects.equals(question.getQuestionText(), questionText)) {
+            question.setQuestionText(questionText);
         }
         if (answer != null && answer.length() > 0 && !Objects.equals(question.getAnswer(), answer)){
             question.setAnswer(answer);

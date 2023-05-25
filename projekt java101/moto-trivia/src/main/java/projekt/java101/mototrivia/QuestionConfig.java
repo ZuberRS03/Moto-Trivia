@@ -11,19 +11,19 @@ import java.util.List;
 @Configuration
 public class QuestionConfig {
     @Bean
-    CommandLineRunner commandLineRunner(QuestionRepository questionrepository) {
+    CommandLineRunner commandLineRunner(QuestionRepository questionRepository) {
         return args -> {
             Question Question001 = new Question(
-                    1L,
                     "Ile koni ma Nissan GTR R35?",
                     "550"
             );
             Question Question002 = new Question(
-                    2L,
                     "Ile koni ma Ford Mustang?",
                     "450"
             );
-            questionrepository.saveAll(
+            System.out.println(Question001.toString());
+            System.out.println(Question002.toString());
+            questionRepository.saveAll(
                     List.of(Question001, Question002)
             );
         };
