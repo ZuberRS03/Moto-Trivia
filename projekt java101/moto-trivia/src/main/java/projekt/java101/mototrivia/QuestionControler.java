@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/questions")
@@ -17,8 +18,8 @@ public class QuestionControler {
                 this.questionService = questionService;
         }
 
-        @GetMapping("/")
-        public List<Question> getQuestion(){
+        @GetMapping("/all")
+        public List<Question> getQuestions(){
 
                 return questionService.getQuestions();
         }

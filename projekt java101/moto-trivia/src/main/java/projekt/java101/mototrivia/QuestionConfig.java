@@ -21,8 +21,8 @@ public class QuestionConfig {
                     "Ile koni ma Ford Mustang?",
                     "450"
             );
-            System.out.println(Question001.toString());
-            System.out.println(Question002.toString());
+//            System.out.println(Question001.toString());
+//            System.out.println(Question002.toString());
             questionRepository.saveAll(
                     List.of(Question001, Question002)
             );

@@ -1,7 +1,7 @@
 package projekt.java101.mototrivia;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,20 +10,43 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Service
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private Scanner scanner;
+    private int score;
 
     @Autowired
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
+        this.scanner = new Scanner(System.in);
+        this.score = 0;
+    }
+
+    public void startQuiz(){
+        List<Question> questions = getQuestions();
+        for (Question question : questions) {
+            printQuestion(question);
+            String answer = scanner.nextLine();
+            if (answer.equals(question.getAnswer())){
+                System.out.println("Poprawna odpowiedź!");
+                score++;
+            } else {
+                System.out.println("Zła odpowiedź!");
+            }
+        }
+        System.out.println("Twój wynik to: " + score + "/" + questions.size());
     }
 
     public List<Question> getQuestions(){
-        return questionRepository.findAll();
+        List<Question> questions = new ArrayList<>();
+        questionRepository.findAll().forEach(questions::add);
+        return questions;
+    }
+
+    private void printQuestion(Question question){
+        System.out.println(question.getQuestionText());
     }
 
     public void addNewQuestion(Question question) {
