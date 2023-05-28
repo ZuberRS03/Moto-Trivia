@@ -7,7 +7,50 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    h1{
+        text-align: center;
+        font-size: 50px;
+        color: black;
+    }
+    button{
+        font-size: 30px;
+    }
+</style>
 <body>
-
+    <header>
+        <h1>Witam w quizie "moto-trivia"</h1>
+    </header>
+    <main>
+        <button id="startQuiz">
+            <a href="quiz.html">Start</a>
+<!--            <a href="http://localhost:8080/api/v1/questions/all">Start</a>-->
+        </button>
+    </main>
 </body>
+<script>
+
+
+
+    // const question = document.getElementById("question");
+    // question.innerHTML = "treść pytania 2 ";
+
+    // const btn = document.getElementById("startQuiz");
+    // btn.addEventListener("click", function (){
+    //     fetch("http://localhost:8080/api/v1/questions/all")
+    //         .then(response => response.json)
+    //         .then(data => {
+    //             const questions = data.results[1];
+    //             const questionContainer = document.getElementById("questionContainer");
+    //             questionContainer.innerHTML = `
+    //             <ul>
+    //             <li>Pytanie: ${questions.question}</li>
+    //             </ul>
+    //             `
+    //         })
+    //         .catch(error => {
+    //             console.log("Błąd pobierania danych", error)
+    //         })
+    // })
+</script>
 </html>

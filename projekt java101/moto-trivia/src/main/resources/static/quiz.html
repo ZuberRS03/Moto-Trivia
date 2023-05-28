@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="questionContainer"></div>
+        <p id="question">treść pytania</p>
+        <input type="text" id="answer"/>
+        <button onclick="submitAnswer()">dalej</button>
+    </div>
+    <div id="resultContainer" style="display: none">
+        <h2>Wynik: <sapn id="score"></sapn></h2>
+        <button onclick="goToIndex()">Powrót do strony głównej</button>
+    </div>
+    <script></script>
+
+</body>
+<script>
+    var score = 0; // Wynik
+    var currentQuestionIndex = 0; // Bierzący indeks pytania
+    var questions;
+
+    window.onload = (event) => {
+        let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                console.log(response);
+                questions = response.map(obj => obj);
+                showQuestion(questions[currentQuestionIndex]);
+            }
+        };
+        xhr.open('GET', 'http://localhost:8080/api/v1/questions/all', true);
+        xhr.send();
+    };
+
+    // Wyświetlanie pytań na stronie
+    function showQuestion(question) {
+        const questionElement = document.getElementById('question');
+        questionElement.innerHTML = question.questionText;
+    }
+
+    function submitAnswer(){
+        const answerInput = document.getElementById('answer');
+        const answer = answerInput.value;
+
+        if(answer === questions[currentQuestionIndex].answer) {
+            score++;
+        }
+
+        currentQuestionIndex++;
+
+        if(currentQuestionIndex < questions.length) {
+            showQuestion(questions[currentQuestionIndex]);
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        const questionContainer = document.getElementById('questionContainer');
+        const resultContainer =  document.getElementById('resultContainer');
+        const scoreElement = document.getElementById('score');
+
+        // Ukrywanie kontenera z pytaniami
+        questionContainer.style.display = 'none';
+
+        // Wyświetlanie kontenera z wynikiem
+        resultContainer.style.display = 'block';
+
+        // Ustawianie wyniku
+        scoreElement.textContent = score;
+    }
+
+    // Powrót do strony głównej
+    function goToIndex(){
+        window.location.href = 'index.html';
+    }
+</script>
+</html>
